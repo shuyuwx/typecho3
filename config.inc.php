@@ -18,16 +18,12 @@ require_once __TYPECHO_ROOT_DIR__ . '/var/Typecho/Common.php';
 \Typecho\Common::init();
 
 // config db
-$db = new \Typecho\Db('Pdo_Mysql', 'typecho_');
-$db->addServer(array (
-  'host' => $_ENV["HOST"],
-  'port' => $_ENV["PORT"],
-  'user' => $_ENV["USER"],
-  'password' => $_ENV["PASSWORD"],
-  'charset' => 'utf8mb4',
-  'database' => $_ENV['DATABASE'],
-  'engine' => 'InnoDB',
-  'sslCa' => 'ssl/cacert.pem',
-  'sslVerify' => 'true',
-), \Typecho\Db::READ | \Typecho\Db::WRITE);
-\Typecho\Db::set($db);
+$db = new \Typecho\Db('Pdo_Pgsql', 'typecho_');
+$db->addServer(array(
+    'host' => $_ENV["TYPECHO_HOST"],
+    'user' => $_ENV["TYPECHO_USERNAME"],
+    'password' => $_ENV["TYPECHO_PASSWORD"],
+    'port' => $_ENV["TYPECHO_PORT"],
+    'database' => $_ENV["TYPECHO_DATABASE"],
+), Typecho_Db::READ | Typecho_Db::WRITE);
+Typecho_Db::set($db);
